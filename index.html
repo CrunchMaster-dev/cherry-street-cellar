@@ -90,6 +90,11 @@
   /* ---------- hero ---------- */
   .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
     align-items:center;text-align:center;position:relative;overflow:hidden;padding:8rem 1.2rem 5rem}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:url("img/hero.jpg") center/cover no-repeat;
+    transform:scale(1.04);filter:saturate(.85)}
+  .hero-bg::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 90% at 50% 40%,rgba(18,16,15,.58),rgba(18,16,15,.9) 88%),
+      linear-gradient(180deg,rgba(18,16,15,.72),rgba(18,16,15,.55) 45%,var(--cellar) 99%)}
   .glow{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);
     width:min(120vw,1100px);aspect-ratio:1;border-radius:50%;
     background:radial-gradient(circle,rgba(232,181,99,.22)0%,rgba(232,181,99,.08)32%,transparent 62%);
@@ -141,16 +146,31 @@
 
   /* table (menu) */
   .table-sec{background:var(--cellar)}
-  .dishes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3.4rem;
-    background:var(--hairline);border:1px solid var(--hairline)}
-  @media(max-width:820px){.dishes{grid-template-columns:1fr}}
-  .dish{background:var(--cellar-2);padding:2.2rem 1.9rem;min-height:220px;display:flex;flex-direction:column;
-    transition:background .4s}
-  .dish:hover{background:var(--oxblood-deep)}
-  .dish .k{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.22em;
-    font-size:.68rem;color:var(--candle);margin-bottom:auto}
-  .dish h3{font-size:1.55rem;margin:1.4rem 0 .6rem;font-weight:340}
-  .dish p{color:var(--ash);font-size:.98rem;line-height:1.55}
+  .feast{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:3.2rem;
+    border:1px solid var(--hairline);background:var(--hairline)}
+  @media(max-width:640px){.feast{grid-template-columns:1fr}}
+  .feast figure{position:relative;margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--cellar-2)}
+  .feast img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease);filter:brightness(.92)}
+  .feast figure:hover img{transform:scale(1.05)}
+  .feast figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1.5rem .95rem;
+    background:linear-gradient(transparent,rgba(18,16,15,.9));display:flex;flex-direction:column;gap:.25rem}
+  .feast .fk{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.22em;
+    font-size:.64rem;color:var(--candle)}
+  .feast .fn{font-family:"Fraunces",serif;font-size:1.25rem;color:var(--cream);font-style:italic}
+
+  .menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.6rem);margin-top:3.4rem}
+  @media(max-width:820px){.menu-cols{grid-template-columns:1fr;gap:2.4rem}}
+  .m-group + .m-group{margin-top:2.6rem}
+  .m-head{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.26em;
+    font-size:.74rem;font-weight:600;color:var(--candle);padding-bottom:.9rem;
+    border-bottom:1px solid var(--hairline);margin-bottom:1.1rem}
+  .m-item{padding:.7rem 0}
+  .m-line{display:flex;align-items:baseline;gap:.6rem}
+  .m-line .nm{font-family:"Fraunces",serif;font-size:1.16rem;font-weight:400;color:var(--cream)}
+  .m-line .dots{flex:1;border-bottom:1px dotted var(--ash-dim);transform:translateY(-.2em);min-width:1.2rem}
+  .m-line .pr{font-family:"Fraunces",serif;font-style:italic;color:var(--candle);font-size:1.06rem}
+  .m-desc{color:var(--ash);font-size:.9rem;line-height:1.5;margin-top:.15rem;max-width:44ch}
+  .m-veg{color:var(--bottle);font-size:.82rem}
   .oyster{margin-top:2.6rem;display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap;
     padding:1.6rem 1.9rem;border:1px solid var(--hairline);background:linear-gradient(100deg,var(--oxblood-deep),transparent 80%)}
   .oyster .price{font-family:"Fraunces",serif;font-size:2rem;color:var(--candle);font-style:italic}
@@ -160,8 +180,10 @@
 
   /* room (private) */
   .room-sec{background:linear-gradient(180deg,var(--oxblood-deep),var(--cellar))}
-  .room-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2.4rem,5vw,5rem);align-items:center}
+  .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.4rem,5vw,4rem);align-items:center}
   @media(max-width:820px){.room-grid{grid-template-columns:1fr}}
+  .room-photo{margin:0;overflow:hidden;border:1px solid var(--hairline);aspect-ratio:3/2}
+  .room-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.9) saturate(.92)}
   .room-card{border:1px solid var(--hairline);padding:clamp(2rem,4vw,3rem);background:rgba(74,20,32,.18)}
   .room-card ul{list-style:none;margin-top:1.6rem}
   .room-card li{padding:1rem 0;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:1rem}
@@ -213,20 +235,21 @@
     <a href="#table">The Table</a>
     <a href="#room">Private Dining</a>
     <a href="#visit">Visit</a>
-    <a class="reserve" href="#visit">Reserve</a>
+    <a class="reserve" href="https://tables.toasttab.com/restaurants/f51890f6-e7fa-47ce-83fc-c780d9191097/findTime" target="_blank" rel="noopener">Reserve</a>
   </nav>
-  <button class="menu-btn" onclick="document.getElementById('visit').scrollIntoView()">Reserve</button>
+  <a class="menu-btn" href="https://tables.toasttab.com/restaurants/f51890f6-e7fa-47ce-83fc-c780d9191097/findTime" target="_blank" rel="noopener">Reserve</a>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-bg"></div>
   <div class="glow"></div>
   <div class="hero-inner">
     <span class="eyebrow">Columbia, Missouri &nbsp;·&nbsp; Est. on Cherry Street</span>
     <h1 class="wordmark"><span class="amp">an evening</span><em>below street level</em></h1>
     <p class="hero-sub">An intimate wine cellar and seasonal land-and-sea kitchen. Boutique bottles, a full bar, and oysters on ice, five nights a week.</p>
     <div class="hero-cta">
-      <a class="btn" href="#visit">Reserve a Table</a>
+      <a class="btn" href="https://tables.toasttab.com/restaurants/f51890f6-e7fa-47ce-83fc-c780d9191097/findTime" target="_blank" rel="noopener">Reserve a Table</a>
       <a class="btn ghost" href="#table">See the Menu</a>
     </div>
   </div>
@@ -260,23 +283,43 @@
   <div class="wrap reveal">
     <span class="eyebrow">The Kitchen</span>
     <h2>Land and sea, sourced from the best of the Midwest.</h2>
-    <p class="lede">A seasonal menu that changes with what's good. Below is the shape of an evening — the printed menu is updated weekly.</p>
+    <p class="lede">A seasonal menu that turns over with what's good. A few of tonight's plates below — the full menu changes weekly.</p>
 
-    <div class="dishes">
-      <div class="dish">
-        <span class="k">From the Sea</span>
-        <h3>Oysters &amp; Raw Bar</h3>
-        <p>Shucked to order, on ice. A rotating selection sourced fresh, daily.</p>
+    <div class="feast">
+      <figure>
+        <img src="img/oysters.jpg" alt="Grilled oysters in green curry butter with saltine crackers and lemon" loading="lazy">
+        <figcaption><span class="fk">From the Raw Bar</span><span class="fn">Oysters, Fresh Shucked or Grilled</span></figcaption>
+      </figure>
+      <figure>
+        <img src="img/mussels.jpg" alt="A pot of mussels with frites, grilled bread and aioli" loading="lazy">
+        <figcaption><span class="fk">From the Sea</span><span class="fn">Shellfish &amp; Frites</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="menu-cols">
+      <div>
+        <div class="m-group">
+          <div class="m-head">Snacks &amp; Bites</div>
+          <div class="m-item"><div class="m-line"><span class="nm">Fried Maitake Mushrooms</span><span class="dots"></span><span class="pr">18</span></div><div class="m-desc">Locally cultivated maitake, yuzu-tamari sauce.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Grilled Mokum Carrots</span><span class="dots"></span><span class="pr">18</span></div><div class="m-desc">Whipped sheep's milk feta, rose shatta vinaigrette, hazelnut-almond dukkah, green date tapenade.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Cheese &amp; Chive Gougères</span><span class="dots"></span><span class="pr">8</span></div><div class="m-desc">Warm cheese puffs with gruyère and smoked pimentón.</div></div>
+        </div>
+        <div class="m-group">
+          <div class="m-head">Starters</div>
+          <div class="m-item"><div class="m-line"><span class="nm">Beef Marrow Bones &amp; Waffles</span><span class="dots"></span><span class="pr">33</span></div><div class="m-desc">Roasted marrow, shallot jam, parsley.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Beet, Burrata &amp; Bacon Salad</span><span class="dots"></span><span class="pr">18</span></div><div class="m-desc">Spiced date jam, shaved fennel, beauty heart radish, pecans, mimosa vinaigrette.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Cheese Plate</span><span class="dots"></span><span class="pr">28</span></div><div class="m-desc">A trio of cheeses, shallot-gooseberry chutney, marcona almonds, whole grain mustard, baguette.</div></div>
+        </div>
       </div>
-      <div class="dish">
-        <span class="k">From the Land</span>
-        <h3>Seasonal Plates</h3>
-        <p>Midwest produce and proteins, plated with intent. The menu turns over with the season.</p>
-      </div>
-      <div class="dish">
-        <span class="k">To Finish</span>
-        <h3>Dessert &amp; Late Bar</h3>
-        <p>A short, serious dessert list and a bar that stays open past the last dinner seating.</p>
+      <div>
+        <div class="m-group">
+          <div class="m-head">Entrées</div>
+          <div class="m-item"><div class="m-line"><span class="nm">Wild Alaskan Halibut Bouillabaisse</span><span class="dots"></span><span class="pr">49</span></div><div class="m-desc">Fruits de mer — scallops, shrimp &amp; clams, confit cherry tomatoes, gruyère crouton, saffron rouille.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Moulard Duck Breast</span><span class="dots"></span><span class="pr">53</span></div><div class="m-desc">Pomegranate molasses lacquer, foie gras braised lentils, rutabaga mousseline, rhubarb mustard.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Grilled Bone-In Pork Chop</span><span class="dots"></span><span class="pr">48</span></div><div class="m-desc">Walker Farms pork, french pomme purée, wild morels &amp; mustard cream, fiddlehead ferns.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Steak Frites</span><span class="dots"></span><span class="pr">51</span></div><div class="m-desc">MO-raised hanger steak, cacio e pepe pomme frites, béarnaise butter, creamed greens, bordelaise.</div></div>
+          <div class="m-item"><div class="m-line"><span class="nm">Double Patty Smash Burger</span><span class="dots"></span><span class="pr">28</span></div><div class="m-desc">Hertzog Family Farms beef, gruyère, caramelized onion, giardiniera dijonnaise, dilly pickles, frites.</div></div>
+        </div>
       </div>
     </div>
 
@@ -284,7 +327,7 @@
       <span class="price">$3.25</span>
       <span class="txt"><b>Oyster Wednesdays</b> — fresh oysters, that price, all night long.</span>
     </div>
-    <p class="note">Selections change with the season and availability. Ask your server for tonight's list.</p>
+    <p class="note">A selection only — the printed menu changes weekly with the season. Vegetarian options are marked in-house; please tell your server about any dietary preferences.</p>
   </div>
 </section>
 
@@ -292,21 +335,23 @@
 <section class="block room-sec" id="room">
   <span class="bin">Bin 03 — The Room</span>
   <div class="wrap room-grid reveal">
+    <figure class="room-photo">
+      <img src="img/room.jpg" alt="Cherry Street Cellar dining room — warm wood tables, black windsor chairs, globe pendant lights" loading="lazy">
+    </figure>
     <div>
       <span class="eyebrow">Private Dining</span>
       <h2>A room of your own, for the nights that matter.</h2>
       <p class="lede">Our private dining room seats up to twenty — right for a business dinner, a rehearsal, or a birthday that deserves the good bottles. Tell us the occasion and we'll build the evening around it.</p>
-      <a class="btn ghost" href="#visit" style="margin-top:2rem">Inquire About Events</a>
-    </div>
-    <div class="room-card">
-      <span class="eyebrow">At a Glance</span>
-      <ul>
-        <li><span>Seated capacity</span><span>Up to 20</span></li>
-        <li><span>Best for</span><span>Dinners &amp; gatherings</span></li>
-        <li><span>Wine service</span><span>Full cellar access</span></li>
-        <li><span>Booking</span><span>Up to 3 months out</span></li>
-        <li><span>Gift cards</span><span>Available</span></li>
-      </ul>
+      <div class="room-card" style="margin-top:2rem">
+        <span class="eyebrow">At a Glance</span>
+        <ul>
+          <li><span>Seated capacity</span><span>Up to 20</span></li>
+          <li><span>Best for</span><span>Dinners &amp; gatherings</span></li>
+          <li><span>Wine service</span><span>Full cellar access</span></li>
+          <li><span>Booking</span><span>Up to 3 months out</span></li>
+        </ul>
+      </div>
+      <a class="btn ghost" href="mailto:info@cherrystreetcellar.com?subject=Private%20Dining%20Inquiry" style="margin-top:1.8rem">Inquire About Events</a>
     </div>
   </div>
 </section>
@@ -336,8 +381,8 @@
           <a href="mailto:info@cherrystreetcellar.com"><span class="tag">Email</span>info@cherrystreetcellar.com</a>
         </div>
         <div class="visit-cta">
-          <a class="btn" href="#" onclick="return false">Reserve a Table</a>
-          <a class="btn ghost" href="mailto:info@cherrystreetcellar.com">Gift Cards</a>
+          <a class="btn" href="https://tables.toasttab.com/restaurants/f51890f6-e7fa-47ce-83fc-c780d9191097/findTime" target="_blank" rel="noopener">Reserve a Table</a>
+          <a class="btn ghost" href="https://swipeit.com/product/2281/cherry-street-cellar" target="_blank" rel="noopener">Gift Cards</a>
         </div>
       </div>
     </div>
@@ -348,8 +393,8 @@
   <div class="fmark">Cherry Street <span>Cellar</span></div>
   <div class="fmeta">505 Cherry Street · Columbia, MO 65201 · (573) 442-7281<br>Tuesday through Saturday, from 5:00 PM</div>
   <div class="social">
-    <a href="#" onclick="return false">Instagram</a>
-    <a href="#" onclick="return false">Facebook</a>
+    <a href="https://instagram.com/cherrystreetcellar" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/cherrystreetcellar" target="_blank" rel="noopener">Facebook</a>
   </div>
 </footer>
 
