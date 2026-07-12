@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.className+=' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cherry Street Cellar — Wine Bar &amp; Seasonal Dining, Columbia MO</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2316100F'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23E8B563' font-family='Georgia,serif' font-style='italic'%3EC%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#16100F">
+<meta name="description" content="An intimate wine cellar and seasonal land-and-sea kitchen at 505 Cherry Street, Columbia, Missouri. International wine list, fresh oysters daily, craft cocktails. Reservations recommended.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..600&family=Barlow:wght@400;500&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cellar:#16100F;      /* warm aubergine-black */
+    --cellar-2:#1E1512;    /* raised surface */
+    --oxblood:#4A1420;     /* deep wine */
+    --oxblood-deep:#2C0D14;
+    --candle:#E8B563;      /* candlelight amber */
+    --candle-soft:#F0CE93;
+    --bottle:#3E4A3D;      /* bottle glass green */
+    --cream:#F1E9DA;       /* warm off-white */
+    --ash:#A99A88;         /* muted taupe */
+    --ash-dim:#6F6459;
+    --hairline:rgba(233,181,99,0.16);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cellar);
+    color:var(--cream);
+    font-family:"Barlow",system-ui,sans-serif;
+    font-size:clamp(16px,1.05vw + 12px,18px);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--candle);color:var(--cellar)}
+
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:340;line-height:1.02;letter-spacing:-.01em}
+  .eyebrow{
+    font-family:"Barlow Semi Condensed",sans-serif;
+    text-transform:uppercase;letter-spacing:.34em;
+    font-size:.72rem;font-weight:600;color:var(--candle);
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- layout scaffold ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(22px,5vw,64px)}
+  section{position:relative}
+
+  /* cellar spine + bin tags */
+  .bin{
+    position:absolute;top:clamp(48px,7vw,96px);left:clamp(22px,5vw,64px);
+    font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.28em;font-size:.68rem;font-weight:600;color:var(--ash-dim);
+    display:flex;align-items:center;gap:.7em;z-index:2;
+  }
+  .bin::before{content:"";width:34px;height:1px;background:var(--hairline)}
+  @media(max-width:820px){.bin{position:static;margin-bottom:1.4rem}}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.15rem clamp(22px,5vw,64px);
+    transition:background .4s var(--ease),padding .4s var(--ease),border-color .4s;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(18,12,11,.86);backdrop-filter:blur(12px);
+    padding-top:.75rem;padding-bottom:.75rem;border-bottom:1px solid var(--hairline);
+  }
+  .brand{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.42em;font-size:.86rem;font-weight:600;color:var(--cream);padding-left:.42em}
+  .brand span{color:var(--candle)}
+  nav.links{display:flex;gap:2.1rem;align-items:center}
+  nav.links a{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.2em;font-size:.74rem;font-weight:500;color:var(--ash);transition:color .25s}
+  nav.links a:hover{color:var(--cream)}
+  nav.links a.reserve{color:var(--candle)}
+  nav.links a.reserve:hover{color:var(--candle-soft)}
+  .menu-btn{display:none;background:none;border:0;color:var(--cream);cursor:pointer;
+    font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:.78rem}
+  @media(max-width:820px){nav.links{display:none}.menu-btn{display:block}}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;position:relative;overflow:hidden;padding:8rem 1.2rem 5rem}
+  .glow{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);
+    width:min(120vw,1100px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,181,99,.22)0%,rgba(232,181,99,.08)32%,transparent 62%);
+    filter:blur(6px);z-index:0;animation:flicker 7s ease-in-out infinite}
+  @keyframes flicker{0%,100%{opacity:.9;transform:translate(-50%,-50%) scale(1)}
+    45%{opacity:1;transform:translate(-50%,-51%) scale(1.04)}
+    70%{opacity:.82;transform:translate(-50%,-49.4%) scale(.99)}}
+  .hero-inner{position:relative;z-index:1;max-width:900px}
+  .hero .eyebrow{display:block;margin-bottom:1.6rem}
+  .wordmark{font-weight:300;font-size:clamp(3.2rem,10.5vw,8.6rem);line-height:.92;
+    font-style:italic;color:var(--cream)}
+  .wordmark em{font-style:normal;display:block;letter-spacing:-.015em}
+  .wordmark .amp{color:var(--candle);font-style:italic}
+  .hero-sub{margin:2rem auto 0;max-width:38ch;color:var(--ash);font-size:1.08rem;line-height:1.6}
+  .hero-cta{margin-top:2.8rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+  .btn{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.2em;font-size:.82rem;font-weight:600;padding:1.05em 2.2em;
+    border:1px solid var(--candle);color:var(--cellar);background:var(--candle);
+    cursor:pointer;transition:transform .3s var(--ease),background .3s,color .3s,box-shadow .3s;
+    display:inline-block;border-radius:1px}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px -12px rgba(232,181,99,.55);background:var(--candle-soft)}
+  .btn.ghost{background:transparent;color:var(--candle)}
+  .btn.ghost:hover{background:rgba(232,181,99,.08);box-shadow:none}
+
+  .scroll-hint{position:absolute;bottom:1.9rem;left:50%;transform:translateX(-50%);
+    font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.32em;
+    font-size:.64rem;color:var(--ash-dim);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+  .scroll-hint .line{width:1px;height:34px;background:linear-gradient(var(--ash-dim),transparent);animation:drop 2.4s ease-in-out infinite}
+  @keyframes drop{0%{opacity:0;transform:scaleY(.3);transform-origin:top}50%{opacity:1}100%{opacity:0;transform:scaleY(1);transform-origin:bottom}}
+
+  /* ---------- generic section ---------- */
+  .block{padding:clamp(5.5rem,11vw,9rem) 0}
+  .block h2{font-size:clamp(2.1rem,5.2vw,3.7rem);max-width:16ch}
+  .lede{color:var(--ash);max-width:52ch;margin-top:1.4rem;font-size:1.12rem}
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* cellar (wine) */
+  .cellar-sec{background:linear-gradient(180deg,var(--cellar),var(--oxblood-deep) 140%)}
+  .two{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2.4rem,5vw,5rem);align-items:center}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+  .pour{border-left:1px solid var(--hairline);padding-left:1.8rem}
+  .pour p+p{margin-top:1.1rem;color:var(--ash)}
+  .stat-row{display:flex;gap:2.6rem;margin-top:2.6rem;flex-wrap:wrap}
+  .stat .n{font-family:"Fraunces",serif;font-size:2.7rem;color:var(--candle);line-height:1}
+  .stat .l{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.18em;font-size:.7rem;color:var(--ash);margin-top:.5rem}
+
+  /* table (menu) */
+  .table-sec{background:var(--cellar)}
+  .dishes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3.4rem;
+    background:var(--hairline);border:1px solid var(--hairline)}
+  @media(max-width:820px){.dishes{grid-template-columns:1fr}}
+  .dish{background:var(--cellar-2);padding:2.2rem 1.9rem;min-height:220px;display:flex;flex-direction:column;
+    transition:background .4s}
+  .dish:hover{background:var(--oxblood-deep)}
+  .dish .k{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.22em;
+    font-size:.68rem;color:var(--candle);margin-bottom:auto}
+  .dish h3{font-size:1.55rem;margin:1.4rem 0 .6rem;font-weight:340}
+  .dish p{color:var(--ash);font-size:.98rem;line-height:1.55}
+  .oyster{margin-top:2.6rem;display:flex;align-items:baseline;gap:1.2rem;flex-wrap:wrap;
+    padding:1.6rem 1.9rem;border:1px solid var(--hairline);background:linear-gradient(100deg,var(--oxblood-deep),transparent 80%)}
+  .oyster .price{font-family:"Fraunces",serif;font-size:2rem;color:var(--candle);font-style:italic}
+  .oyster .txt{color:var(--cream)}
+  .oyster .txt b{color:var(--candle-soft);font-weight:500}
+  .note{color:var(--ash-dim);font-size:.86rem;margin-top:1.4rem;font-style:italic}
+
+  /* room (private) */
+  .room-sec{background:linear-gradient(180deg,var(--oxblood-deep),var(--cellar))}
+  .room-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2.4rem,5vw,5rem);align-items:center}
+  @media(max-width:820px){.room-grid{grid-template-columns:1fr}}
+  .room-card{border:1px solid var(--hairline);padding:clamp(2rem,4vw,3rem);background:rgba(74,20,32,.18)}
+  .room-card ul{list-style:none;margin-top:1.6rem}
+  .room-card li{padding:1rem 0;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:1rem}
+  .room-card li:last-child{border-bottom:1px solid var(--hairline)}
+  .room-card li span:first-child{color:var(--cream)}
+  .room-card li span:last-child{color:var(--ash);font-family:"Barlow Semi Condensed",sans-serif;
+    text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;text-align:right}
+
+  /* visit */
+  .visit-sec{background:var(--cellar);border-top:1px solid var(--hairline)}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.4rem,5vw,4.5rem)}
+  @media(max-width:820px){.visit-grid{grid-template-columns:1fr}}
+  .hours dl{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1.4rem;margin-top:1.8rem}
+  .hours dt{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;
+    font-size:.82rem;color:var(--candle);padding:.55rem 0;border-top:1px solid var(--hairline)}
+  .hours dd{padding:.55rem 0;border-top:1px solid var(--hairline);color:var(--cream)}
+  .hours dd small{color:var(--ash);display:block;font-size:.82rem}
+  .contact-line{margin-top:1.6rem;display:flex;flex-direction:column;gap:.7rem}
+  .contact-line a,.contact-line span{display:flex;align-items:baseline;gap:.9rem;color:var(--cream)}
+  .contact-line .tag{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.18em;font-size:.7rem;color:var(--ash);min-width:5.5em}
+  .contact-line a:hover{color:var(--candle)}
+  .visit-cta{margin-top:2.6rem;display:flex;gap:1rem;flex-wrap:wrap}
+
+  /* footer */
+  footer{background:var(--oxblood-deep);padding:3.4rem 0;text-align:center}
+  footer .fmark{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.42em;font-size:.82rem;color:var(--cream)}
+  footer .fmark span{color:var(--candle)}
+  footer .fmeta{color:var(--ash-dim);font-size:.82rem;margin-top:1rem;line-height:1.9}
+  footer .social{margin-top:1.4rem;display:flex;gap:1.4rem;justify-content:center}
+  footer .social a{font-family:"Barlow Semi Condensed",sans-serif;text-transform:uppercase;
+    letter-spacing:.18em;font-size:.72rem;color:var(--ash);transition:color .25s}
+  footer .social a:hover{color:var(--candle)}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top">Cherry Street <span>Cellar</span></a>
+  <nav class="links">
+    <a href="#cellar">The Cellar</a>
+    <a href="#table">The Table</a>
+    <a href="#room">Private Dining</a>
+    <a href="#visit">Visit</a>
+    <a class="reserve" href="#visit">Reserve</a>
+  </nav>
+  <button class="menu-btn" onclick="document.getElementById('visit').scrollIntoView()">Reserve</button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="glow"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">Columbia, Missouri &nbsp;·&nbsp; Est. on Cherry Street</span>
+    <h1 class="wordmark"><span class="amp">an evening</span><em>below street level</em></h1>
+    <p class="hero-sub">An intimate wine cellar and seasonal land-and-sea kitchen. Boutique bottles, a full bar, and oysters on ice, five nights a week.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#visit">Reserve a Table</a>
+      <a class="btn ghost" href="#table">See the Menu</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Descend</span><span class="line"></span></div>
+</section>
+
+<!-- THE CELLAR -->
+<section class="block cellar-sec" id="cellar">
+  <span class="bin">Bin 01 — The Cellar</span>
+  <div class="wrap two reveal">
+    <div>
+      <span class="eyebrow">The Wine</span>
+      <h2>A list built for wandering, not for showing off.</h2>
+      <p class="lede">Our cellar leans on boutique and organic producers from across the world, chosen because they taste like somewhere. Come in knowing exactly what you want, or hand it to the bar and let us pour you somewhere new.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">150+</div><div class="l">Bottles on the list</div></div>
+        <div class="stat"><div class="n">5–6</div><div class="l">Happy hour, nightly</div></div>
+        <div class="stat"><div class="n">Full</div><div class="l">Service bar &amp; cocktails</div></div>
+      </div>
+    </div>
+    <div class="pour">
+      <p>The bar runs the full length of the room. Craft cocktails, local beers and ciders, and a rotating pour list for the nights you'd rather stay by the glass.</p>
+      <p>Wednesdays, oysters go all night. Fridays and Saturdays fill fast. Either way, the seat at the bar is the best one in the house.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE TABLE -->
+<section class="block table-sec" id="table">
+  <span class="bin">Bin 02 — The Table</span>
+  <div class="wrap reveal">
+    <span class="eyebrow">The Kitchen</span>
+    <h2>Land and sea, sourced from the best of the Midwest.</h2>
+    <p class="lede">A seasonal menu that changes with what's good. Below is the shape of an evening — the printed menu is updated weekly.</p>
+
+    <div class="dishes">
+      <div class="dish">
+        <span class="k">From the Sea</span>
+        <h3>Oysters &amp; Raw Bar</h3>
+        <p>Shucked to order, on ice. A rotating selection sourced fresh, daily.</p>
+      </div>
+      <div class="dish">
+        <span class="k">From the Land</span>
+        <h3>Seasonal Plates</h3>
+        <p>Midwest produce and proteins, plated with intent. The menu turns over with the season.</p>
+      </div>
+      <div class="dish">
+        <span class="k">To Finish</span>
+        <h3>Dessert &amp; Late Bar</h3>
+        <p>A short, serious dessert list and a bar that stays open past the last dinner seating.</p>
+      </div>
+    </div>
+
+    <div class="oyster">
+      <span class="price">$3.25</span>
+      <span class="txt"><b>Oyster Wednesdays</b> — fresh oysters, that price, all night long.</span>
+    </div>
+    <p class="note">Selections change with the season and availability. Ask your server for tonight's list.</p>
+  </div>
+</section>
+
+<!-- PRIVATE DINING -->
+<section class="block room-sec" id="room">
+  <span class="bin">Bin 03 — The Room</span>
+  <div class="wrap room-grid reveal">
+    <div>
+      <span class="eyebrow">Private Dining</span>
+      <h2>A room of your own, for the nights that matter.</h2>
+      <p class="lede">Our private dining room seats up to twenty — right for a business dinner, a rehearsal, or a birthday that deserves the good bottles. Tell us the occasion and we'll build the evening around it.</p>
+      <a class="btn ghost" href="#visit" style="margin-top:2rem">Inquire About Events</a>
+    </div>
+    <div class="room-card">
+      <span class="eyebrow">At a Glance</span>
+      <ul>
+        <li><span>Seated capacity</span><span>Up to 20</span></li>
+        <li><span>Best for</span><span>Dinners &amp; gatherings</span></li>
+        <li><span>Wine service</span><span>Full cellar access</span></li>
+        <li><span>Booking</span><span>Up to 3 months out</span></li>
+        <li><span>Gift cards</span><span>Available</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="block visit-sec" id="visit">
+  <span class="bin">Bin 04 — Visit</span>
+  <div class="wrap reveal">
+    <span class="eyebrow">Reservations &amp; Hours</span>
+    <h2>Reservations are highly recommended.</h2>
+    <p class="lede">We accept bookings up to three months in advance. Walk-ins are welcome at the bar when there's room.</p>
+
+    <div class="visit-grid" style="margin-top:2.6rem">
+      <div class="hours">
+        <span class="eyebrow">Hours</span>
+        <dl>
+          <dt>Tue – Sat</dt><dd>Doors 5:00 PM <small>Last dinner seating 9:00 PM · Bar &amp; dessert til 10:00 PM</small></dd>
+          <dt>Happy Hour</dt><dd>5:00 – 6:00 PM, nightly</dd>
+          <dt>Sun – Mon</dt><dd>Closed <small>Also closed major holidays</small></dd>
+        </dl>
+      </div>
+      <div>
+        <span class="eyebrow">Find Us</span>
+        <div class="contact-line">
+          <span><span class="tag">Where</span>505 Cherry Street, Columbia, MO 65201</span>
+          <a href="tel:+15734427281"><span class="tag">Call</span>(573) 442-7281</a>
+          <a href="mailto:info@cherrystreetcellar.com"><span class="tag">Email</span>info@cherrystreetcellar.com</a>
+        </div>
+        <div class="visit-cta">
+          <a class="btn" href="#" onclick="return false">Reserve a Table</a>
+          <a class="btn ghost" href="mailto:info@cherrystreetcellar.com">Gift Cards</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fmark">Cherry Street <span>Cellar</span></div>
+  <div class="fmeta">505 Cherry Street · Columbia, MO 65201 · (573) 442-7281<br>Tuesday through Saturday, from 5:00 PM</div>
+  <div class="social">
+    <a href="#" onclick="return false">Instagram</a>
+    <a href="#" onclick="return false">Facebook</a>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>40)},{passive:true});
+
+  // scroll reveal
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
